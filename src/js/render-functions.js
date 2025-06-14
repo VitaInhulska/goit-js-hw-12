@@ -2,7 +2,15 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector(".gallery");
-const loader = document.querySelector(".loader");
+const loadBtn = document.querySelector(".load-more");
+const topLoader = document.querySelector('.top-loader');
+const bottomLoader = document.querySelector('.bottom-loader');
+
+let loaderPosition = "top";
+
+function setLoaderPosition(position) {
+  loaderPosition = position;
+}
 
 const lightbox = new SimpleLightbox(".gallery a", {captionDelay: 250, captionsData: 'alt'} );
 
@@ -30,11 +38,27 @@ function clearGallery() {
 }
 
 function showLoader() {
-    loader.classList.remove("hidden");
+  if (loaderPosition === 'top') {
+    topLoader.classList.remove('hidden');
+  } else {
+    bottomLoader.classList.remove('hidden');
+  }
 }
 
 function hideLoader() {
-    loader.classList.add("hidden");
+  if (loaderPosition === 'top') {
+    topLoader.classList.add('hidden');
+  } else {
+    bottomLoader.classList.add('hidden');
+  }
 }
 
-export { createGallery, clearGallery, showLoader, hideLoader };
+function showLoadMoreButton() {
+  loadBtn.classList.remove("hidden");
+}
+
+function hideLoadMoreButton() {
+  loadBtn.classList.add("hidden");
+}
+
+export { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton, setLoaderPosition };
